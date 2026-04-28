@@ -1,10 +1,3 @@
-"""
-SentnelOps Internship Assignment
-AI/ML Reasoning + Anomaly Detection
-Author: Hrishi
-Approach: Hybrid (Rule Engine + Confidence Scorer + LLM Reasoner)
-"""
-
 import json
 import os
 import requests
