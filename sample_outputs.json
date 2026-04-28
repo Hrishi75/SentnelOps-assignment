@@ -1,0 +1,85 @@
+[
+  {
+    "resource_id": "i-1",
+    "is_anomalous": true,
+    "anomaly_types": [
+      "over_provisioned"
+    ],
+    "primary_anomaly": "over_provisioned",
+    "reason": "CPU utilization is significantly below capacity at both average and peak levels, indicating the instance is larger than the workload requires.",
+    "suggested_action": "Downsize to a smaller instance type to reduce cost. Review memory needs before resizing.",
+    "confidence": 0.74,
+    "security_note": "HIGH RISK \u2014 Internet-facing resource with identity/IAM attached. Combined with detected anomaly (over_provisioned), this resource should be reviewed immediately."
+  },
+  {
+    "resource_id": "i-2",
+    "is_anomalous": true,
+    "anomaly_types": [
+      "cpu_saturation"
+    ],
+    "primary_anomaly": "cpu_saturation",
+    "reason": "CPU is consistently near or at maximum capacity. This will cause performance degradation, timeouts, or dropped requests under load.",
+    "suggested_action": "Scale vertically (larger instance) or horizontally (add replicas). Profile the workload to identify hotspots.",
+    "confidence": 0.62,
+    "security_note": null
+  },
+  {
+    "resource_id": "i-3",
+    "is_anomalous": true,
+    "anomaly_types": [
+      "cpu_spike"
+    ],
+    "primary_anomaly": "cpu_spike",
+    "reason": "Average CPU is low but peak (p95) is very high, indicating a bursty workload pattern. Standard metrics may mask these bursts.",
+    "suggested_action": "Consider auto-scaling policies or a burstable instance type designed for spiky workloads.",
+    "confidence": 0.69,
+    "security_note": "MEDIUM RISK \u2014 Internal resource with identity/IAM attached. Ensure least-privilege policies are enforced."
+  },
+  {
+    "resource_id": "i-4",
+    "is_anomalous": true,
+    "anomaly_types": [
+      "cpu_saturation",
+      "memory_pressure"
+    ],
+    "primary_anomaly": "cpu_saturation",
+    "reason": "CPU is consistently near or at maximum capacity. This will cause performance degradation, timeouts, or dropped requests under load. Additionally detected: memory_pressure.",
+    "suggested_action": "Scale vertically (larger instance) or horizontally (add replicas). Profile the workload to identify hotspots.",
+    "confidence": 0.77,
+    "security_note": "HIGH RISK \u2014 Internet-facing resource with identity/IAM attached. Combined with detected anomaly (cpu_saturation, memory_pressure), this resource should be reviewed immediately."
+  },
+  {
+    "resource_id": "i-5",
+    "is_anomalous": true,
+    "anomaly_types": [
+      "idle_resource"
+    ],
+    "primary_anomaly": "idle_resource",
+    "reason": "Both CPU and memory usage are critically low, suggesting this resource is either unused or running an empty/stopped workload.",
+    "suggested_action": "Investigate if this instance is still needed. If not, terminate or hibernate to eliminate waste.",
+    "confidence": 0.64,
+    "security_note": "HIGH RISK \u2014 Internet-facing resource with identity/IAM attached. Combined with detected anomaly (idle_resource), this resource should be reviewed immediately."
+  },
+  {
+    "resource_id": "i-6",
+    "is_anomalous": false,
+    "anomaly_types": [],
+    "primary_anomaly": "none",
+    "reason": "All metrics are within normal operating ranges. No anomalies detected.",
+    "suggested_action": "No action required. Continue standard monitoring.",
+    "confidence": 0.0,
+    "security_note": null
+  },
+  {
+    "resource_id": "i-7",
+    "is_anomalous": true,
+    "anomaly_types": [
+      "network_anomaly"
+    ],
+    "primary_anomaly": "network_anomaly",
+    "reason": "Network bandwidth consumption is unusually high. This may indicate data exfiltration, a misconfigured service, or a DDoS pattern.",
+    "suggested_action": "Inspect network flow logs immediately. Rate-limit or block suspicious traffic sources.",
+    "confidence": 0.61,
+    "security_note": "MEDIUM RISK \u2014 Resource is publicly exposed to the internet."
+  }
+]
